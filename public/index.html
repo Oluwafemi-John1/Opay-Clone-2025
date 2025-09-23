@@ -10,10 +10,11 @@
 <body>
     <h1>Firebase Authentication</h1>
     <button onclick="signGoogle()">Log in with Google</button>
+    <button onclick="signGitHub()">Log in with GitHub</button>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAquIc4lCH9HbwvZyg0lMLvGP3mJRNuXQI",
@@ -27,6 +28,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
+        const gitProvider = new GithubAuthProvider();
 
         const signGoogle = () => {
             signInWithPopup(auth, provider)
@@ -41,7 +43,22 @@
                     console.log(errorMessage);
                 })
         }
+
+        const signGitHub = () => {
+            signInWithPopup(auth, gitProvider)
+                .then((result) => {
+                    const user = result.user;
+                    console.log(user);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode);
+                    console.log(errorMessage);
+                })
+        }
         window.signGoogle = signGoogle
+        window.signGitHub = signGitHub
     </script>
 </body>
 
