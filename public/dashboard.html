@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAquIc4lCH9HbwvZyg0lMLvGP3mJRNuXQI",
+            authDomain: "opay-clone-2025-84b3f.firebaseapp.com",
+            projectId: "opay-clone-2025-84b3f",
+            storageBucket: "opay-clone-2025-84b3f.firebasestorage.app",
+            messagingSenderId: "283410622370",
+            appId: "1:283410622370:web:007e37b7783d20676074fb"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+        const gitProvider = new GithubAuthProvider();
+
+        const signGoogle = () => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const user = result.user;
+                    console.log(user);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode);
+                    console.log(errorMessage);
+                })
+        }
+
+        const signGitHub = () => {
+            signInWithPopup(auth, gitProvider)
+                .then((result) => {
+                    const user = result.user;
+                    console.log(user);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode);
+                    console.log(errorMessage);
+                })
+        }
+        window.signGoogle = signGoogle
+        window.signGitHub = signGitHub
+    </script>
+</body>
+</html>
