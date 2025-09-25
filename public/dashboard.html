@@ -7,6 +7,10 @@
 </head>
 <body>
     <h1>Dashboard</h1>
+    <div id="show">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="">
+    </div>
+    <button onclick="signUserOut()">Sign Out</button>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
@@ -27,10 +31,21 @@
         onAuthStateChanged(auth, (user)=>{
             if(user) {
                 console.log(user);
+                show.innerHTML = ''
+                show.innerHTML += `
+                    <p>Welcome ${user.displayName}</p>
+                    <p>Your email is ${user.email}</p>
+                    <img src=${user.photoURL} />
+                `
             } else {
                 console.log('user is signed out');
             }
         })
+
+        const signUserOut = () => {
+            alert(89)
+        }
+        window.signUserOut = signUserOut
     </script>
 </body>
 </html>
