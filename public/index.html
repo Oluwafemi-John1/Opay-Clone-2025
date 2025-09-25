@@ -4,15 +4,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Opay Clone - Financial Freedom</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: #fff;
+            color: #222;
+            width: 100vw;
+            height: 100vh;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+            padding: 2.5rem 2rem;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 1.2s cubic-bezier(.68, -0.55, .27, 1.55);
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #444;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7em;
+            width: 100%;
+            padding: 0.8rem 0;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            background: #fff;
+            color: #222;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn.google {
+            border: 2px solid #4285F4;
+            color: #4285F4;
+        }
+
+        .btn.google:hover {
+            background: #4285F4;
+            color: #fff;
+        }
+
+        .btn.google .fa-google {
+            color: #4285F4;
+        }
+
+        .btn.github {
+            border: 2px solid #EA4335;
+            color: #EA4335;
+        }
+
+        .btn.github:hover {
+            background: #EA4335;
+            color: #fff;
+        }
+
+        .btn.github .fa-github {
+            color: #EA4335;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 1.2rem;
+            animation: bounceIn 1.2s cubic-bezier(.68, -0.55, .27, 1.55);
+        }
+
+        .features {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 1.5rem 0 1rem 0;
+            gap: 1em;
+        }
+
+        .feature {
+            flex: 1;
+            background: #f7f7f7;
+            border-radius: 12px;
+            padding: 1em 0.5em;
+            margin: 0 0.2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.95em;
+        }
+
+        .feature i {
+            font-size: 1.5em;
+            margin-bottom: 0.4em;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 18px;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 4px 16px rgba(66, 133, 244, 0.10);
+            animation: fadeInUp 1.5s 0.3s both;
+        }
+
+        .color-bar {
+            display: flex;
+            height: 8px;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .color-bar div {
+            flex: 1;
+            height: 100%;
+        }
+
+        .color-bar .blue {
+            background: #4285F4;
+        }
+
+        .color-bar .red {
+            background: #EA4335;
+        }
+
+        .color-bar .green {
+            background: #34A853;
+        }
+
+        .color-bar .yellow {
+            background: #FBBC05;
+        }
+
+        @media (max-width: 600px) {
+
+            html,
+            body {
+                height: 100vh;
+                min-height: 100vh;
+            }
+
+            body {
+                height: 100vh;
+                min-height: 100vh;
+            }
+
+            .container {
+                padding: 1.2rem 0.5rem;
+                min-height: 100vh;
+                max-width: 100vw;
+                width: 100vw;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-img {
+                max-width: 90vw;
+            }
+
+            .features {
+                flex-direction: column;
+                gap: 1em;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Firebase Authentication</h1>
-    <button onclick="signGoogle()">Log in with Google</button>
-    <button onclick="signGitHub()">Log in with GitHub</button>
+    <div class="container">
+        <div class="color-bar">
+            <div class="blue"></div>
+            <div class="red"></div>
+            <div class="green"></div>
+            <div class="yellow"></div>
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Opay_logo.png" alt="Opay Clone Logo"
+            class="logo" />
+        <h1>Opay Clone</h1>
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80"
+            alt="Financial Freedom" class="hero-img" />
+        <div class="features">
+            <div class="feature">
+                <i class="fa-solid fa-shield-halved" style="color:#4285F4"></i>
+                Secure Payments
+            </div>
+            <div class="feature">
+                <i class="fa-solid fa-bolt" style="color:#EA4335"></i>
+                Instant Transfers
+            </div>
+            <div class="feature">
+                <i class="fa-solid fa-lightbulb" style="color:#34A853"></i>
+                Smart Solutions
+            </div>
+        </div>
+        <p>Welcome to Opay Clone, your gateway to seamless financial freedom. Experience secure payments, instant
+            transfers, and smart financial solutions for everyone.</p>
+        <button class="btn google" onclick="signGoogle()"><i class="fa-brands fa-google"></i> Log in with
+            Google</button>
+        <button class="btn github" onclick="signGitHub()"><i class="fa-brands fa-github"></i> Log in with
+            GitHub</button>
+    </div>
 
     <script type="module">
+        // ...existing code...
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
@@ -60,6 +317,7 @@
         window.signGoogle = signGoogle
         window.signGitHub = signGitHub
     </script>
+
 </body>
 
 </html>
