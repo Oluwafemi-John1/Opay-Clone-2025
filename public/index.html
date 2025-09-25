@@ -270,7 +270,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, sendEmailVerification } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAquIc4lCH9HbwvZyg0lMLvGP3mJRNuXQI",
@@ -291,8 +291,13 @@
                 .then((result) => {
                     const user = result.user;
                     console.log(user);
+                    sendEmailVerification(auth.currentUser)
+                        .then(() => {
+                            console.log('email sent');
+                            
+                        });
                     setTimeout(() => {
-                        user?window.location.href='dashboard.html':window.location.href='index.html'
+                        user ? window.location.href = 'dashboard.html' : window.location.href = 'index.html'
                     }, 1500);
                 })
                 .catch((error) => {
@@ -309,7 +314,7 @@
                     const user = result.user;
                     console.log(user);
                     setTimeout(() => {
-                        user?window.location.href='dashboard.html':window.location.href='index.html'
+                        user ? window.location.href = 'dashboard.html' : window.location.href = 'index.html'
                     }, 1500);
                 })
                 .catch((error) => {
