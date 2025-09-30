@@ -13,10 +13,16 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="">
     </div>
     <button onclick="signUserOut()">Sign Out</button>
+    <h3>Add Transaction</h3>
+    <input type="number" placeholder="Amount" id="amount">
+    <input type="text" placeholder="Description" id="description">
+    <input type="text" placeholder="User" id="user">
+    <button id="btnSubmit">Submit</button>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAquIc4lCH9HbwvZyg0lMLvGP3mJRNuXQI",
@@ -30,24 +36,30 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const database = getDatabase(app);
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                console.log(user);
-                show.innerHTML = ''
-                show.innerHTML += `
-                    <p>Welcome ${user.displayName}</p>
-                    <p>Your email is ${user.email}</p>
-                    <img src=${user.photoURL} />
-                `
-            } else {
-                show.innerHTML = ''
-                show.innerHTML = '<h3>You have to sign in first. Redirecting...</h3>'
-                setTimeout(() => {
-                    window.location.href = 'index.html'
-                }, 1000);
-            }
-        })
+        try {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    console.log(user);
+                    show.innerHTML = ''
+                    show.innerHTML += `
+                        <p>Welcome ${user.displayName}</p>
+                        <p>Your email is ${user.email}</p>
+                        <img src=${user.photoURL} />
+                    `
+                } else {
+                    show.innerHTML = ''
+                    show.innerHTML = '<h3>You have to sign in first. Redirecting...</h3>'
+                    setTimeout(() => {
+                        window.location.href = 'index.html'
+                    }, 1000);
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+
 
         const signUserOut = () => {
             signOut(auth).then(() => {
@@ -57,6 +69,25 @@
             });
         }
         window.signUserOut = signUserOut
+
+        const submitBtn = document.getElementById('btnSubmit')
+        submitBtn.addEventListener('click', ()=>{
+            if(amount.value=='' || description.value=='' || user.value=='') {
+                alert('empty values, fill in something')
+            } else {
+                const transact = {
+                    amount: amount.value,
+                    description: description.value,
+                    user: user.value,
+                    date: new Date().toLocaleDateString(),
+                    time: new Date().toLocaleTimeString()
+                }
+                // console.log(transact);
+                const transactRef = ref(database, 'transactions')
+                set(transactRef, transact)
+            }
+            
+        })
     </script>
 </body>
 
